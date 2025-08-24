@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Profile README Generator - Enhanced Edition</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+        .dark .gradient-bg { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); }
+        .dark .bg-gray-50 { background-color: #1a1a1a; }
+        .dark .bg-white { background-color: #2d2d2d; }
+        .dark .text-gray-800 { color: #e5e5e5; }
+        .dark .text-gray-600 { color: #a0a0a0; }
+        .dark .border-gray-300 { border-color: #4a4a4a; }
+        .dark .bg-gray-100 { background-color: #2d2d2d; }
+        .dark .bg-gray-800 { background-color: #1a1a1a; }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen transition-colors duration-300">
+    <!-- Header -->
+    <header class="gradient-bg text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex justify-between items-center mb-6">
+                <div></div>
+                <div class="flex items-center space-x-4">
+                    <label class="flex items-center cursor-pointer">
+                        <input type="checkbox" id="darkModeToggle" class="sr-only">
+                        <div class="relative">
+                            <div class="block bg-white w-14 h-8 rounded-full"></div>
+                            <div class="dot absolute left-1 top-1 bg-blue-600 w-6 h-6 rounded-full transition-transform duration-300"></div>
+                        </div>
+                        <span class="ml-3 text-sm">🌙 Dark Mode</span>
+                    </label>
+                </div>
+            </div>
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">
+                🎨 GitHub Profile README Generator
+            </h1>
+            <p class="text-xl md:text-2xl opacity-90 max-w-3xl mx-auto">
+                Create stunning GitHub profile READMEs with ease! Showcase your skills, projects, and personality.
+            </p>
+            <div class="mt-6 flex justify-center space-x-4">
+                <span class="text-sm opacity-75">⌨️ Ctrl+Enter: Generate</span>
+                <span class="text-sm opacity-75">💾 Ctrl+S: Save</span>
+                <span class="text-sm opacity-75">🌙 Ctrl+D: Dark Mode</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="grid lg:grid-cols-2 gap-8">
+            <!-- Generator Form -->
+            <div class="space-y-6">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 card-hover">
+                    <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6 flex items-center">
+                        <i data-lucide="settings" class="w-6 h-6 mr-3 text-blue-600"></i>
+                        Generator Settings
+                    </h2>
+                    
+                    <form id="generatorForm" class="space-y-4">
+                        <!-- Basic Info -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Your Name *</label>
+                            <input type="text" id="name" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white" placeholder="Colin" required>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">GitHub Username *</label>
+                            <input type="text" id="username" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white" placeholder="Colin869" required>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Tagline</label>
+                            <input type="text" id="tagline" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white" placeholder="Gamer/Developer | Japan/Canada">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">About Me</label>
+                            <textarea id="about" rows="3" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white" placeholder="Passionate developer who loves gaming and creating useful tools..."></textarea>
+                        </div>
+                        
+                        <!-- Theme Selection -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Theme</label>
+                            <select id="theme" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white">
+                                <option value="classic">🎨 Classic</option>
+                                <option value="dark">🌙 Dark</option>
+                                <option value="colorful">🌈 Colorful</option>
+                                <option value="minimal">⚪ Minimal</option>
+                                <option value="developer">💻 Developer</option>
+                                <option value="professional">👔 Professional</option>
+                                <option value="creative">🎭 Creative</option>
+                                <option value="tech">🔧 Tech</option>
+                            </select>
+                            
+                            <!-- Theme Preview -->
+                            <div class="mt-2 flex flex-wrap gap-2">
+                                <button type="button" class="theme-preview-btn px-3 py-1 text-xs rounded border hover:bg-blue-50 dark:hover:bg-blue-900/20" data-theme="classic">🎨</button>
+                                <button type="button" class="theme-preview-btn px-3 py-1 text-xs rounded border hover:bg-blue-50 dark:hover:bg-blue-900/20" data-theme="dark">🌙</button>
+                                <button type="button" class="theme-preview-btn px-3 py-1 text-xs rounded border hover:bg-blue-50 dark:hover:bg-blue-900/20" data-theme="colorful">🌈</button>
+                                <button type="button" class="theme-preview-btn px-3 py-1 text-xs rounded border hover:bg-blue-50 dark:hover:bg-blue-900/20" data-theme="minimal">⚪</button>
+                                <button type="button" class="theme-preview-btn px-3 py-1 text-xs rounded border hover:bg-blue-50 dark:hover:bg-blue-900/20" data-theme="developer">💻</button>
+                                <button type="button" class="theme-preview-btn px-3 py-1 text-xs rounded border hover:bg-blue-50 dark:hover:bg-blue-900/20" data-theme="professional">👔</button>
+                                <button type="button" class="theme-preview-btn px-3 py-1 text-xs rounded border hover:bg-blue-50 dark:hover:bg-blue-900/20" data-theme="creative">🎭</button>
+                                <button type="button" class="theme-preview-btn px-3 py-1 text-xs rounded border hover:bg-blue-50 dark:hover:bg-blue-900/20" data-theme="tech">🔧</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Advanced Options Toggle -->
+                        <div class="border-t pt-4">
+                            <button type="button" id="advancedOptionsToggle" class="flex items-center text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300">
+                                <i data-lucide="chevron-down" class="w-4 h-4 mr-2 transition-transform duration-200"></i>
+                                Advanced Options
+                            </button>
+                        </div>
+                        
+                        <!-- Advanced Options -->
+                        <div id="advancedOptions" class="hidden space-y-4 pl-4 border-l-2 border-gray-200 dark:border-gray-600">
+                            <!-- Location & Work -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Location</label>
+                                <input type="text" id="location" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white" placeholder="Japan/Canada">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Company</label>
+                                <input type="text" id="company" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white" placeholder="Freelancer">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Blog</label>
+                                <input type="url" id="blog" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white" placeholder="https://your-blog.com">
+                            </div>
+                            
+                            <!-- GitHub Stats Options -->
+                            <div class="border-t pt-4">
+                                <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">GitHub Statistics</h4>
+                                <div class="space-y-2">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" id="githubStats" class="mr-2" checked>
+                                        <span class="text-sm text-gray-600 dark:text-gray-400">Enable GitHub Stats</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" id="contributionGraph" class="mr-2" checked>
+                                        <span class="text-sm text-gray-600 dark:text-gray-400">Contribution Graph</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" id="languageStats" class="mr-2" checked>
+                                        <span class="text-sm text-gray-600 dark:text-gray-400">Language Statistics</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" id="profileViews" class="mr-2" checked>
+                                        <span class="text-sm text-gray-600 dark:text-gray-400">Profile Views Counter</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Social Links -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Social Links</label>
+                            <div class="space-y-2">
+                                <input type="url" id="youtube" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white" placeholder="YouTube Channel URL">
+                                <input type="url" id="twitter" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white" placeholder="Twitter/X Profile URL">
+                                <input type="url" id="website" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white" placeholder="Personal Website">
+                            </div>
+                        </div>
+                        
+                        <!-- Skills -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Skills (comma-separated)</label>
+                            <input type="text" id="skills" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white" placeholder="JavaScript, Python, Lua, HTML, CSS">
+                        </div>
+                        
+                        <!-- Projects -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Featured Projects (one per line)</label>
+                            <textarea id="projects" rows="4" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white" placeholder="Project Name - Description
+Another Project - Another description"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-200">
+                            🚀 Generate README
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Features -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 card-hover">
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-4">✨ Features</h3>
+                    <ul class="space-y-2 text-gray-600 dark:text-gray-400">
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 mr-2 text-green-500"></i>8 beautiful themes</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 mr-2 text-green-500"></i>Real-time preview</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 mr-2 text-green-500"></i>Dark mode support</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 mr-2 text-green-500"></i>GitHub statistics integration</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 mr-2 text-green-500"></i>Form validation</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 mr-2 text-green-500"></i>Keyboard shortcuts</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 mr-2 text-green-500"></i>Local storage preferences</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Preview -->
+            <div class="space-y-6">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 card-hover">
+                    <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6 flex items-center">
+                        <i data-lucide="eye" class="w-6 h-6 mr-3 text-green-600"></i>
+                        Live Preview
+                    </h2>
+                    <div id="preview" class="border border-gray-200 dark:border-gray-600 rounded-lg p-6 bg-gray-50 dark:bg-gray-900 min-h-[400px] overflow-y-auto">
+                        <div class="text-center text-gray-500 dark:text-gray-400 py-20">
+                            <i data-lucide="github" class="w-16 h-16 mx-auto mb-4 text-gray-400"></i>
+                            <p class="text-lg">Fill out the form to see your README preview here!</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex space-x-2">
+                        <button id="copyBtn" class="flex-1 bg-gray-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-gray-700 transition-colors duration-200">
+                            📋 Copy Code
+                        </button>
+                        <button id="downloadBtn" class="flex-1 bg-green-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-green-700 transition-colors duration-200">
+                            💾 Download
+                        </button>
+                    </div>
+                    <div class="mt-2 text-right">
+                        <span id="charCount" class="text-sm text-gray-500 dark:text-gray-400">0 characters</span>
+                    </div>
+                </div>
+                
+                <!-- Achievement Progress -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 card-hover">
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-4">🏆 Achievement Progress</h3>
+                    
+                    <!-- Progress Bar -->
+                    <div class="mb-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <span id="progressText" class="text-sm text-gray-600 dark:text-gray-400">2/5 achievements completed</span>
+                            <span class="text-sm text-gray-600 dark:text-gray-400">40%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                            <div id="achievementProgressBar" class="h-2 rounded-full transition-all duration-500" style="width: 40%; background-color: #f97316;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-600 dark:text-gray-400">Repository Creation</span>
+                            <span class="text-green-600 font-medium" data-achievement="Repository Creation">✅ Complete</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-600 dark:text-gray-400">Documentation</span>
+                            <span class="text-green-600 font-medium" data-achievement="Documentation">✅ Complete</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-600 dark:text-gray-400">Pull Requests</span>
+                            <span class="text-yellow-600 font-medium" data-achievement="Pull Requests">🔄 In Progress</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-600 dark:text-gray-400">Community Engagement</span>
+                            <span class="text-blue-600 font-medium" data-achievement="Community Engagement">📋 Next Goal</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-600 dark:text-gray-400">Advanced Features</span>
+                            <span class="text-purple-600 font-medium" data-achievement="Advanced Features">🆕 New!</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tips & Tricks -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 card-hover">
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-4">💡 Tips & Tricks</h3>
+                    <div class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                        <p>• Use <kbd class="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-xs">Ctrl+Enter</kbd> to quickly generate</p>
+                        <p>• Try different themes for various use cases</p>
+                        <p>• Enable GitHub stats for professional profiles</p>
+                        <p>• Use the dark mode for late-night coding</p>
+                        <p>• Press <kbd class="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-xs">Ctrl+G</kbd> for a surprise!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-16">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-lg mb-4">Made with ❤️ by <a href="https://github.com/Colin869" class="text-blue-400 hover:text-blue-300">Colin869</a></p>
+            <p class="text-gray-400">Help us earn GitHub achievements together!</p>
+            <div class="mt-4 space-x-4">
+                <a href="https://github.com/Colin869/github-profile-readme-generator" class="text-gray-400 hover:text-white transition-colors duration-200">GitHub</a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors duration-200">Issues</a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors duration-200">Discussions</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/generator.js"></script>
+</body>
+</html>
